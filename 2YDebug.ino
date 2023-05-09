@@ -2,7 +2,7 @@
 // ---------- Biblioteca ----------
 #include <Wire.h>
 
-
+ 
 //--- Endereços HEX de registro do giroscópio
 #define Gyro_gX0 0x28
 #define Gyro_gX1 0x29
