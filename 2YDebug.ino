@@ -46,3 +46,63 @@ void setup()
   Wire.endTransmission();
 }
 // ---------- Fim do setup ----------
+
+
+float giroscopio_Z ()
+{
+  Wire.beginTransmission(Gyro);
+  Wire.write(Gyro_gZ0);
+  Wire.endTransmission();
+  Wire.requestFrom(Gyro, 1);
+  if (Wire.available() <= 1)    gZ0 = Wire.read();
+  Wire.beginTransmission(Gyro);
+  Wire.write(Gyro_gZ1);
+  Wire.endTransmission();
+  Wire.requestFrom(Gyro, 1);
+  if (Wire.available() <= 1)    gZ1 = Wire.read();
+  gZ1 = gZ1 << 8;
+  gZ_out = gZ0 + gZ1;
+  Zg = gZ_out * 0.044;
+  angleZc = Zg * dt;
+  angleZ = angleZ + angleZc;
+  Serial.println(angleZ);
+}
+
+float giroscopio_X ()
+{
+Wire.beginTransmission(Gyro);
+  Wire.write(Gyro_gX0);
+  Wire.endTransmission();
+  Wire.requestFrom(Gyro, 1);
+  if (Wire.available() <= 1)    gX0 = Wire.read();
+  Wire.beginTransmission(Gyro);
+  Wire.write(Gyro_gX1);
+  Wire.endTransmission();
+  Wire.requestFrom(Gyro, 1);
+  if (Wire.available() <= 1)    gX1 = Wire.read();
+  gX1 = gX1 << 8;
+  gX_out = gX0 + gX1;
+  Xg = gX_out * 0.044;//mudar
+  angleXc = Xg * dt;
+  angleX = angleX + angleXc;
+  Serial.println(angleX);
+}
+
+float giroscopio_Y ()
+{
+Wire.beginTransmission(Gyro);
+  Wire.write(Gyro_gY0);
+  Wire.endTransmission();
+  Wire.requestFrom(Gyro, 1);
+  if (Wire.available() <= 1)    gY0 = Wire.read();
+  Wire.beginTransmission(Gyro);
+  Wire.write(Gyro_gY1);
+  Wire.endTransmission();
+  Wire.requestFrom(Gyro, 1);
+  if (Wire.available() <= 1)    gY1 = Wire.read();
+  gY1 = gY1 << 8;
+  gY_out = gY0 + gY1;
+  Yg = gY_out * 0.044;//mudar
+  angleYc = Yg * dt;
+  angleY = angleY + angleYc;
+  Serial.println(angleY);
