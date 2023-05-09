@@ -11,8 +11,6 @@
 #define Gyro_gZ0 0x2C
 #define Gyro_gZ1 0x2D
 
-#define n 10
-
 int Gyro = 0x69; //Endereço HEX do giroscópio
 
 // ---------- Variáveis auxiliares ----------
@@ -25,69 +23,12 @@ float angleX, angleY, angleZ, angleXc, angleYc, angleZc;
 unsigned long start, finished, elapsed;
 float dt = 0.015;
 
-byte Ar;
-byte Walk = 0;
-byte CAFE = 0;
-
-byte Eaverage;
-byte Daverage;
-
-int somaE[n]; //  | Array para filtro de média vdE
-int somaD[n]; //  | Array para filtro de média vdD
-
-
-
-
-
-//=============================================================================================================================================
-// ---------- Motores e sensores ----------
-byte motor1 = 5;
-byte motor1t = 6;
-byte motor2 = 10;
-byte motor2t = 9;
-
-// ---------- Sensores digitais ----------
-int Avanc   = 7;
-int extEsq  = 13;
-int extDir  = 12;
-int Sharp   = 2;
-int sharpL  = 3;
-
-// ---------- Sensores analógicos ----------
-int Esq = A0;
-int Dir = A3;
-int vdE = A2;
-int vdD = A1;
-
-
-
-
-
-//=============================================================================================================================================
-// ---------- Funções segue-linha ----------
-//As arrays estão no campo "variáveis auxiliares"
-
-long mediaE();
-long mediaD();
-
-
-
 
 
 //=============================================================================================================================================
 // ---------- VOID SETUP ----------
 void setup()
 {
-  //Configuração das portas para os motores
-  pinMode(motor1, OUTPUT); pinMode(motor1t, OUTPUT);
-  pinMode(motor2, OUTPUT); pinMode(motor2t, OUTPUT);
-
-  //Configuração das portas para os sensores
-  pinMode(Avanc, INPUT);  pinMode(Esq, INPUT);     pinMode(Dir, INPUT);
-  pinMode(extEsq, INPUT); pinMode(extDir, INPUT);  pinMode(vdE, INPUT_PULLUP);
-  pinMode(vdD, INPUT_PULLUP);
-  pinMode(Sharp, INPUT);  pinMode(sharpL, OUTPUT);
-
   //Inicia a biblioteca e determina a velocidade do monitor serial
   Wire.begin();
   Serial.begin(9600);
